@@ -38,6 +38,6 @@ b = float(input("Enter b: "))
 
 # Call the quadratic function
 solutions = Newton(m, b)
-5
+
 # Print the solutions
 print("Solutions:", solutions)
