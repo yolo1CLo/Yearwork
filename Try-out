@@ -32,13 +32,12 @@ print("Solutions:", solutions)
 def Newton (self, m, b):
     F =  m * b
     print (f"The value of {m} multiplicated by {b} is equal to {F}")
-# Get user input for a, b, c
-a = float(input("Enter a: "))
+# Get user input for a, b
+m = float(input("Enter m: "))
 b = float(input("Enter b: "))
-c = float(input("Enter c: "))
 
 # Call the quadratic function
-solutions = quadratic(a, b, c)
-
+solutions = Newton(m, b)
+5
 # Print the solutions
 print("Solutions:", solutions)
