@@ -29,15 +29,11 @@ solutions = quadratic(a, b, c)
 print("Solutions:", solutions)
 
 #########################################################
-def Newton (self, m, b):
+def Newton (m, b):
     F =  m * b
-    print (f"The value of {m} multiplicated by {b} is equal to {F}")
+    print (f"The value of {m} multiplicated by {b} is equal to the Force being {F}")
 # Get user input for a, b
 m = float(input("Enter m: "))
 b = float(input("Enter b: "))
-
-# Call the quadratic function
-solutions = Newton(m, b)
-
-# Print the solutions
-print("Solutions:", solutions)
+#Solution is bla bla
+Newton(m, b)
