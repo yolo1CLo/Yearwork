@@ -1,0 +1,44 @@
+import math
+
+type = input("Do you want quadratic or newton? = ")
+if type == 'quadratic':
+    quadratic()
+elif type == 'Newton':
+    Newton()
+else:
+    print("Invalid input. Please enter 'a' or 'b'.")
+        
+def quadratic(a, b, c):
+    """Solve the quadratic equation ax^2 + bx + c = 0. Returns two solutions as a tuple."""
+    discriminant = b**2 - 4*a*c
+    if discriminant < 0:
+        return None  # No real solutions
+    x1 = (-b + math.sqrt(discriminant)) / (2*a)
+    x2 = (-b - math.sqrt(discriminant)) / (2*a)
+    return x1, x2
+
+# Get user input for a, b, c
+a = float(input("Enter a: "))
+b = float(input("Enter b: "))
+c = float(input("Enter c: "))
+
+# Call the quadratic function
+solutions = quadratic(a, b, c)
+
+# Print the solutions
+print("Solutions:", solutions)
+
+#########################################################
+def Newton (self, m, b):
+    F =  m * b
+    print (f"The value of {m} multiplicated by {b} is equal to {F}")
+# Get user input for a, b, c
+a = float(input("Enter a: "))
+b = float(input("Enter b: "))
+c = float(input("Enter c: "))
+
+# Call the quadratic function
+solutions = quadratic(a, b, c)
+
+# Print the solutions
+print("Solutions:", solutions)
