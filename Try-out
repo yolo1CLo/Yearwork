@@ -1,34 +1,40 @@
 import math
-
 def quadratic(a, b, c):
-    """Solve the quadratic equation ax^2 + bx + c = 0. Returns two solutions as a tuple."""
     discriminant = b**2 - 4*a*c
     if discriminant < 0:
         return None  
     x1 = (-b + math.sqrt(discriminant)) / (2*a)
     x2 = (-b - math.sqrt(discriminant)) / (2*a)
     return x1, x2
-    quadratic(a,b,c)
-
 #########################################################
-def Newton (m, b):
-    F =  m * b
-    print (f"The value of {m} multiplicated by {b} is equal to the Force being {F}")
-    Newton(m, b)
-
-
+def Newton (m,a,F): 
+    if m.lower() == "miss":
+        m = F/a
+        print (f"The value of {F} divided by {a} is equal to the m being {m} kg.")
+        return m
+    if a.lower() == "miss":
+        a = F/m
+        print (f"The value of {F} divided by {m} is equal to the b being {a}")
+        return a
+    if F.lower() == "miss":
+        F =  m * a
+        print (f"The value of {m} multiplicated by {a} is equal to the Force being {F}")
+        return F
+#########################################################
 type = input("Do you want quadratic or Newton? = ")
-if type == 'quadratic':
+if type.lower() == 'quadratic'.lower():
     a = float(input("Enter a: "))
     b = float(input("Enter b: "))
     c = float(input("Enter c: "))
-    quadratic()
-elif type == 'Newton':
-    m = float(input("Enter m: "))
-    b = float(input("Enter b: "))
-    Newton()
+    quadratic(a,b,c)
+elif type.lower() == 'Newton'.lower():
+    m = input("Enter m: ")
+    a = float(("Enter a: "))
+    F = float(input("Enter F: "))
+    Newton(m,a,F)
 else:
-    print("Invalid input. Please enter 'a' or 'b'.")
+    print("Invalid input. Please enter a correct choice.")
+#########################################################
 # Get user input for a, b
 m = float(input("Enter m: "))
 b = float(input("Enter b: "))
