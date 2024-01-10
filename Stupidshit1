@@ -7,8 +7,12 @@ class my_Calculator:
     def introduce_my_self(self):
         print(f"Hey my name is {self.name} and i'll help you to make some calculations! Let's gooo!")
 
-    def quadratic(self,a, b, c):
+    def quadratic(self):
         """Solve the quadratic equation ax^2 + bx + c = 0. Returns two solutions as a tuple."""
+        print("Define your a, b, c: ")
+        a = input("a = ")
+        b = input("b = ")
+        c = input ("c = ")
         discriminant = b**2 - 4*a*c
         if discriminant < 0:
             return None  # No real solutions
