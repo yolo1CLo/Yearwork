@@ -7,16 +7,17 @@ def quadratic(a, b, c):
     x2 = (-b - math.sqrt(discriminant)) / (2*a)
     return x1, x2
 #########################################################
-def Newton (m,a,F): 
-    if m.lower() == "miss":
+def Newton (variables):
+    m,a,F = variables
+    if m is None:
         m = F/a
         print (f"The value of {F} divided by {a} is equal to the m being {m} kg.")
         return m
-    if a.lower() == "miss":
+    elif a is None:
         a = F/m
-        print (f"The value of {F} divided by {m} is equal to the b being {a}")
+        print (f"The value of {F} divided by {m} is equal to the m being {a} kg.")
         return a
-    if F.lower() == "miss":
+    else: 
         F =  m * a
         print (f"The value of {m} multiplicated by {a} is equal to the Force being {F}")
         return F
@@ -28,15 +29,14 @@ if type.lower() == 'quadratic'.lower():
     c = float(input("Enter c: "))
     quadratic(a,b,c)
 elif type.lower() == 'Newton'.lower():
-    m = input("Enter m: ")
-    a = float(("Enter a: "))
-    F = float(input("Enter F: "))
-    Newton(m,a,F)
+    print("Enter the values for the variables in the formula. Leave empty for the unknown variable: ")
+    variables = [input("mass = "), input("acceleration = "), input("force = ")]
+    for i in range(len(variables)):
+        if variables[i] == "":  # inconnue
+            variables[i] = None
+        else:   # connue
+            variables[i] = float(variables[i])
+    inconnue = Newton(variables)
 else:
     print("Invalid input. Please enter a correct choice.")
 #########################################################
-# Get user input for a, b
-m = float(input("Enter m: "))
-b = float(input("Enter b: "))
-#Solution is bla bla
-Newton(m, b)
