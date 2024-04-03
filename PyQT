@@ -1,33 +1,31 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, uic
+from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 
 class MyWindow (QMainWindow):
     def __init__ (self):
         super(MyWindow, self). __init__()
-        self.setGeometry (200,200,300, 300)
-        self.setWindowTitle("idk")
-        self.initUI()
-    
-    def initUI(self):
-        self.label = QtWidgets.QLabel(self)
-        self.label.setText ("Bal")
-        self.label.move (50,50)
+        uic.loadUi('GUI/screen1.ui', self)
+        self.pushButton.clicked.connect(self.gotocalc)
 
-        self.b1 = QtWidgets.QPushButton(self)
-        self.b1.setText("Let's start")
-        self.b1.clicked.connect (self.clicked)
+    def gotocalc(self):
+        screen2 = calc()
+        widget=QtWidgets.QStackedWidget()
+        widget.addWidget(screen2)
+        widget.setCurrentIndex (widget.currentIndex()+1)
 
-    def clicked (self):
-        self.label.setText ("Je ne sais pas quoi dire")
-        self.update()
-
-    def update (self):
-        self.label.adjustSize()
+class calc (QMainWindow):
+    def __init__ (self):
+        super(calc, self). __init__()
+        uic.loadUi('GUI/screen2.ui', self)
 
 def window():
     app = QApplication (sys.argv)
+    mainwindow=MyWindow()
+    widget=QtWidgets.QStackedWidget()
+    widget.addWidget(mainwindow)
     win = MyWindow()
     win.show()
     sys.exit(app.exec_())
-window()  
+window()                     
