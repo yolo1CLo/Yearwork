@@ -7,13 +7,13 @@ class MyWindow (QMainWindow):
     def __init__ (self):
         super(MyWindow, self). __init__()
         uic.loadUi('GUI/screen1.ui', self)
+        self.app = app
+        self.stackWidget = QtWidgets.QStackedWidget()
         self.pushButton.clicked.connect(self.gotocalc)
 
     def gotocalc(self):
-        screen2 = calc()
-        widget=QtWidgets.QStackedWidget()
-        widget.addWidget(screen2)
-        widget.setCurrentIndex (widget.currentIndex()+1)
+        self.stackWidget.setCurrentIndex (1)
+        self.stackWidget.show()
 
 class calc (QMainWindow):
     def __init__ (self):
@@ -22,10 +22,14 @@ class calc (QMainWindow):
 
 def window():
     app = QApplication (sys.argv)
-    mainwindow=MyWindow()
-    widget=QtWidgets.QStackedWidget()
-    widget.addWidget(mainwindow)
-    win = MyWindow()
-    win.show()
-    sys.exit(app.exec_())
+
+    mainwindow=MyWindow(app)
+    screen2 = calc()
+
+    mainwindow.stackWidget.addWidget (mainwindow)
+    mainwindow.stackWidget.addWidget (screen2)
+    
+    mainwindow.stackWidget.setCurrentIndex(0)
+    mainwindow.stackWidget.show()
+    sys.exit(mainwindow.app.exec_())
 window()                     
