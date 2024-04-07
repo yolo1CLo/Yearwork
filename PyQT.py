@@ -12,8 +12,11 @@ class MyWindow (QMainWindow):
         self.stackWidget = QtWidgets.QStackedWidget() # Create a single QStackedWidget
 
         self.pushButton.clicked.connect(self.gotocalc)
+        #self.pushButton_2.clicked.connect(self.gotocalc)
+
 
     def gotocalc(self):
+        
         self.stackWidget.setCurrentIndex(1) # Show mainwindow first
         self.stackWidget.show() # Show the stackWidget
 
@@ -40,14 +43,16 @@ def window():
     app = QApplication(sys.argv)
     
     mainwindow = MyWindow(app)
-    screen2 = calc() # Assuming you want to initialize this at the start
+    screen2 = calc(app) # Assuming you want to initialize this at the start
     screen3 = quadratic()
 
     mainwindow.stackWidget.addWidget(mainwindow) # Add mainwindow
     mainwindow.stackWidget.addWidget(screen2) # Add screen2
     mainwindow.stackWidget.addWidget(screen3) # Add screen3
+
+
     mainwindow.stackWidget.setCurrentIndex(0) # Show mainwindow first
     mainwindow.stackWidget.show() # Show the stackWidget
     
     sys.exit(mainwindow.app.exec_())
-window()        
+window()                     
