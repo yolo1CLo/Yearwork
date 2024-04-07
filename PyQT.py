@@ -6,7 +6,7 @@ import sys
 class MyWindow (QMainWindow):
     def __init__ (self,app):
         super(MyWindow, self). __init__()
-        uic.loadUi('GUI/screen1.ui', self)
+        uic.loadUi('screen1.ui', self)
 
         self.app = app
         self.stackWidget = QtWidgets.QStackedWidget() # Create a single QStackedWidget
@@ -23,7 +23,7 @@ class MyWindow (QMainWindow):
 class calc (QMainWindow):
     def __init__ (self,app):
         super(calc, self). __init__()
-        uic.loadUi('GUI/screen2.ui', self)
+        uic.loadUi('screen2.ui', self)
 
         self.app = app
         self.stackWidget = QtWidgets.QStackedWidget() # Create a single QStackedWidget
@@ -37,7 +37,7 @@ class calc (QMainWindow):
 class quadratic (QMainWindow):
     def __init__ (self):
         super(quadratic, self). __init__()
-        uic.loadUi('GUI/quadratic.ui', self)
+        uic.loadUi('quadratic.ui', self)
 
 def window():
     app = QApplication(sys.argv)

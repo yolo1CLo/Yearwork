@@ -1,0 +1,28 @@
+To do:
+    1. Formules aangeven
+        1.1. Formules -> DONE
+        1.2. Input vd user -> DONE
+        1.3. Missing input berekenen -> DONE
+        1.4. Extra formules
+    2. Moet correct werken
+    3. Front End correct doen (Carnaval) 
+        3.1. 
+    4. Export op USB + 2 copies maken in case of
+    5. Report schrijven + Poster (Rond Pasen)
+
+
+Lijst formules:
+    Newton's Second Law of Motion: F = m * a
+    Distance Formula: d = v * t
+    Speed Formula: v = d / t
+    Work Formula: W = F * d * cos(θ)
+    Kinetic Energy Formula: KE = 0.5 * m * v²
+    Gravitational Potential Energy: PE = m * g * h
+    Ohm's Law: V = I * R
+    Density Formula: ρ = m / V²
+
+Mogelijke aanpassingen?:
+    - Input van de user
+    - Historique?
+    - Perfecte Front end
+

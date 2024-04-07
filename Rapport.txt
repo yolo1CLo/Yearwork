@@ -16,3 +16,9 @@
     - Worked on the missing variable problem
     - Applied it on the rest of the formulas
     - DividedByError
+
+11-03-2024
+    - Research on GUI
+
+
+31-03-2024
