@@ -10,7 +10,7 @@ class MyWindow(QMainWindow):
         self.stackWidget = stackWidget
         self.pushButton.clicked.connect(self.gotoCalc)  # Assuming pushButton exists in screen1.ui
         self.graph = Graph()
-        self.pushButton_2.clicked.connect (self.Graph.generate_graph)
+        self.pushButton_2.clicked.connect (self.graph.generate_graph)
 
     def gotoCalc(self):
         self.stackWidget.setCurrentIndex(1)
@@ -37,7 +37,7 @@ class Quadratic(QMainWindow):
         
 class Graph(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(Graph,self ).__init__()
 
         self.setWindowTitle("Graph Generator")
 
@@ -90,12 +90,10 @@ def main():
     main_window = MyWindow(stackWidget)
     calc_window = Calc(stackWidget)
     quadr_window = Quadratic(stackWidget)
-    graph_window = Graph(stackWidget)
     # Add screens to the QStackedWidget
     stackWidget.addWidget(main_window)
     stackWidget.addWidget(calc_window)
     stackWidget.addWidget(quadr_window)
-    stackWidget.addWidget(graph_window)
 
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
