@@ -79,16 +79,16 @@
      <string>Work</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>200</x>
       <y>90</y>
-      <width>401</width>
-      <height>31</height>
+      <width>501</width>
+      <height>16</height>
      </rect>
     </property>
-    <property name="plainText">
+    <property name="text">
      <string>Hi, here you can calculate your unkown element of your formula</string>
     </property>
    </widget>

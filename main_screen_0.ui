@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
+ <class>MyWindow</class>
  <widget class="QMainWindow" name="MyWindow">
   <property name="geometry">
    <rect>
@@ -140,33 +140,46 @@
      <string>Graphics</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>60</y>
-      <width>341</width>
-      <height>141</height>
+      <x>90</x>
+      <y>30</y>
+      <width>671</width>
+      <height>71</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Monospace</family>
-      <pointsize>11</pointsize>
-      <italic>false</italic>
-      <underline>false</underline>
-      <strikeout>false</strikeout>
-      <kerning>false</kerning>
-     </font>
+    <property name="text">
+     <string>Hi dear users, this is a tool to calculate the unkown element in an physic formula </string>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
     </property>
-    <property name="plainText">
-     <string>Hi dear users, this is a tool to calculate the unkown element in an physic formula and to make graphics based on your data. Click on the button to be redirected on the page of your choice. </string>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>140</y>
+      <width>671</width>
+      <height>16</height>
+     </rect>
     </property>
-    <property name="backgroundVisible">
-     <bool>false</bool>
+    <property name="text">
+     <string>Click on the button to be redirected on the page of your choice. </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>100</y>
+      <width>381</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>and to make graphics based on your data. </string>
     </property>
    </widget>
   </widget>
