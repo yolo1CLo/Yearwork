@@ -29,11 +29,9 @@ class Quadratic(QMainWindow):
         super(Quadratic, self).__init__()
         uic.loadUi('quad_screen_2.ui', self)
         self.stackWidget = stackWidget
-        # self.a_val = a_DSB.value()
-        # self.b_val = b_DSB.value()
-        # self.c_val = c_DSB.value()
-    # def idk():
-    #     answer = a.val * b.val()
+    def idk(self):
+        #self.pushButton.clicked.connect(self.gotoCalc)  # Assuming a pushButton exists in quad_screen_2.ui
+        answer = self.a_DSB * self.b_DSB * self.c_DSB
         
 class Graph(QMainWindow):
     def __init__(self):
@@ -68,10 +66,14 @@ class Graph(QMainWindow):
         self.layout.addWidget(self.generate_button)
 
     def generate_graph(self):
-        x_values = [float(x_entry.text()) for x_entry in self.x_entries]
-        y_values = [float(y_entry.text()) for y_entry in self.y_entries]
+        try:
+            x_values = [float(x_entry.text()) for x_entry in self.x_entries if x_entry.text().strip()]
+            y_values = [float(y_entry.text()) for y_entry in self.y_entries if y_entry.text().strip()]
+        except ValueError:
+            QMessageBox.critical(self, "Error", "Please enter valid numbers for all data points.")
+            return
 
-        if not all(x_values) or not all(y_values):
+        if len(x_values) == 0 or len(y_values) == 0:
             QMessageBox.critical(self, "Error", "Please enter values for all data points.")
             return
 
@@ -81,6 +83,7 @@ class Graph(QMainWindow):
         plt.title('Graph')
         plt.grid(True)
         plt.show()
+
 
 def main():
     app = QApplication(sys.argv) #QWidget: Must construct a QApplication before a QWidget
