@@ -21,11 +21,16 @@ class MyWindow(QMainWindow):
 class Calc(QMainWindow):
     def __init__(self, stackWidget):
         super(Calc, self).__init__()
-        ui_calc_screen_1.Ui_MainWindow()
+        self.ui = ui_calc_screen_1.Ui_MainWindow()
+        self.ui.setupUi(self)
+
         #uic.loadUi('calc_screen_1.ui', self)
         self.stackWidget = stackWidget
-        self.pushButton_2.clicked.connect(self.Return)
-        self.pushButton_1.clicked.connect(self.gotoQuadratic) 
+        #self.pushButton_2.clicked.connect(self.Return)
+        #self.pushButton_1.clicked.connect(self.gotoQuadratic) 
+
+        self.ui.pushButton_2.clicked.connect(self.Return)
+
     def gotoQuadratic(self):
         self.stackWidget.setCurrentIndex(2)
     def Return (self):

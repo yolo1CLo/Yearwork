@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox,QMenuBar,QStatusBar
+from PyQt5.QtCore import QRect,QCoreApplication,QMetaObject
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
