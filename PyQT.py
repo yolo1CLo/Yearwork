@@ -2,7 +2,10 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
 import sys
 import matplotlib.pyplot as plt
-
+#from ui_calc_screen_1 import Ui_MainWindow
+import tk
+import ui_calc_screen_1
+from ui_calc_screen_1 import Ui_MainWindow
 class MyWindow(QMainWindow):
     def __init__(self, stackWidget):
         super(MyWindow, self).__init__()
@@ -18,11 +21,15 @@ class MyWindow(QMainWindow):
 class Calc(QMainWindow):
     def __init__(self, stackWidget):
         super(Calc, self).__init__()
-        uic.loadUi('calc_screen_1.ui', self)
+        ui_calc_screen_1.Ui_MainWindow()
+        #uic.loadUi('calc_screen_1.ui', self)
         self.stackWidget = stackWidget
-        self.pushButton_1.clicked.connect(self.gotoQuadratic)  # Assuming pushButton_1 exists in screen2.ui
+        self.pushButton_2.clicked.connect(self.Return)
+        self.pushButton_1.clicked.connect(self.gotoQuadratic) 
     def gotoQuadratic(self):
         self.stackWidget.setCurrentIndex(2)
+    def Return (self):
+        self.stackWidget.setCurrentIndex (0)
 
 class Quadratic(QMainWindow):
     def __init__(self, stackWidget):
@@ -30,7 +37,6 @@ class Quadratic(QMainWindow):
         uic.loadUi('quad_screen_2.ui', self)
         self.stackWidget = stackWidget
     def idk(self):
-        #self.pushButton.clicked.connect(self.gotoCalc)  # Assuming a pushButton exists in quad_screen_2.ui
         answer = self.a_DSB * self.b_DSB * self.c_DSB
         
 class Graph(QMainWindow):
