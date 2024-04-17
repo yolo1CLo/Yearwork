@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QDoubleSpinBox, QFrame, QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox, QMenuBar, QStatusBar
 from PyQt5.QtCore import QRect,QCoreApplication,QMetaObject 
 
-
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -10,9 +9,9 @@ class Ui_Form(object):
         self.label_4 = QLabel(Form)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(300, 110, 101, 31))
-        self.doubleSpinBox = QDoubleSpinBox(Form)
-        self.doubleSpinBox.setObjectName(u"doubleSpinBox")
-        self.doubleSpinBox.setGeometry(QRect(40, 140, 62, 24))
+        self.d_DSB = QDoubleSpinBox(Form)
+        self.d_DSB.setObjectName(u"doubleSpinBox")
+        self.d_DSB.setGeometry(QRect(40, 140, 62, 24))
         self.label_2 = QLabel(Form)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(20, 110, 111, 31))
@@ -22,21 +21,24 @@ class Ui_Form(object):
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(90, 30, 251, 61))
-        self.doubleSpinBox_2 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
-        self.doubleSpinBox_2.setGeometry(QRect(160, 140, 62, 24))
-        self.doubleSpinBox_3 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_3.setObjectName(u"doubleSpinBox_3")
-        self.doubleSpinBox_3.setGeometry(QRect(310, 140, 62, 24))
+        self.F_DSB = QDoubleSpinBox(Form)
+        self.F_DSB.setObjectName(u"doubleSpinBox_2")
+        self.F_DSB.setGeometry(QRect(160, 140, 62, 24))
+        self.W_DSB = QDoubleSpinBox(Form)
+        self.W_DSB.setObjectName(u"doubleSpinBox_3")
+        self.W_DSB.setGeometry(QRect(310, 140, 62, 24))
         self.label_5 = QLabel(Form)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(140, 200, 111, 31))
-        self.doubleSpinBox_4 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_4.setObjectName(u"doubleSpinBox_4")
-        self.doubleSpinBox_4.setGeometry(QRect(150, 230, 62, 24))
+        self.c_DSB = QDoubleSpinBox(Form)
+        self.c_DSB.setObjectName(u"doubleSpinBox_4")
+        self.c_DSB.setGeometry(QRect(150, 230, 62, 24))
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(20, 280, 80, 23))
+        self.pushButton_2 = QPushButton(Form)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(140, 270, 80, 23))
 
         self.retranslateUi(Form)
 
@@ -51,5 +53,6 @@ class Ui_Form(object):
         self.label.setText(QCoreApplication.translate("Form", u"Here you can calculate the Work Force", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"Input for Grade", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
     # retranslateUi
 

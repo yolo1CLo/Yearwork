@@ -6,15 +6,15 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(400, 300)
-        self.doubleSpinBox_3 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_3.setObjectName(u"doubleSpinBox_3")
-        self.doubleSpinBox_3.setGeometry(QRect(290, 170, 62, 24))
-        self.doubleSpinBox = QDoubleSpinBox(Form)
-        self.doubleSpinBox.setObjectName(u"doubleSpinBox")
-        self.doubleSpinBox.setGeometry(QRect(40, 170, 62, 24))
-        self.doubleSpinBox_2 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
-        self.doubleSpinBox_2.setGeometry(QRect(170, 170, 62, 24))
+        self.S_DSB = QDoubleSpinBox(Form)
+        self.S_DSB.setObjectName(u"doubleSpinBox_3")
+        self.S_DSB.setGeometry(QRect(290, 170, 62, 24))
+        self.d_DSB = QDoubleSpinBox(Form)
+        self.d_DSB.setObjectName(u"doubleSpinBox")
+        self.d_DSB.setGeometry(QRect(40, 170, 62, 24))
+        self.t_DSB = QDoubleSpinBox(Form)
+        self.t_DSB.setObjectName(u"doubleSpinBox_2")
+        self.t_DSB.setGeometry(QRect(170, 170, 62, 24))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(80, 40, 251, 61))
@@ -30,6 +30,9 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(0, 270, 80, 23))
+        self.pushButton_2 = QPushButton(Form)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(160, 220, 80, 23))
 
         self.retranslateUi(Form)
 
@@ -43,5 +46,6 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for time", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Input for speed", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
     # retranslateUi
 

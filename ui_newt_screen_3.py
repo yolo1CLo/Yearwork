@@ -6,15 +6,15 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(400, 300)
-        self.doubleSpinBox = QDoubleSpinBox(Form)
-        self.doubleSpinBox.setObjectName(u"doubleSpinBox")
-        self.doubleSpinBox.setGeometry(QRect(30, 140, 62, 24))
-        self.doubleSpinBox_2 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
-        self.doubleSpinBox_2.setGeometry(QRect(160, 140, 62, 24))
-        self.doubleSpinBox_3 = QDoubleSpinBox(Form)
-        self.doubleSpinBox_3.setObjectName(u"doubleSpinBox_3")
-        self.doubleSpinBox_3.setGeometry(QRect(280, 140, 62, 24))
+        self.m_DSB = QDoubleSpinBox(Form)
+        self.m_DSB.setObjectName(u"doubleSpinBox")
+        self.m_DSB.setGeometry(QRect(30, 140, 62, 24))
+        self.a_DSB = QDoubleSpinBox(Form)
+        self.a_DSB.setObjectName(u"doubleSpinBox_2")
+        self.a_DSB.setGeometry(QRect(160, 140, 62, 24))
+        self.F_DSB = QDoubleSpinBox(Form)
+        self.F_DSB.setObjectName(u"doubleSpinBox_3")
+        self.F_DSB.setGeometry(QRect(280, 140, 62, 24))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(70, 10, 251, 61))
@@ -30,6 +30,9 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(0, 260, 80, 23))
+        self.pushButton_2 = QPushButton(Form)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(150, 170, 80, 23))
 
         self.retranslateUi(Form)
 
@@ -43,5 +46,6 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for acceleration", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Input for Force", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
     # retranslateUi
 
