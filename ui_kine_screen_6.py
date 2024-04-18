@@ -30,9 +30,10 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(10, 260, 80, 23))
-        self.pushButton_2 = QPushButton(Form)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(170, 210, 80, 23))
+
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"resultLabel")
+        self.resultLabel.setGeometry(QRect(130, 280, 371, 20))
 
         self.retranslateUi(Form)
 
@@ -45,7 +46,7 @@ class Ui_Form(object):
         self.label_4.setText(QCoreApplication.translate("Form", u"Input for Energy", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for mass", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Input for speed", None))
+        self.label.setText(QCoreApplication.translate("Form", u"Here you can calculate the Speed", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
     # retranslateUi
 

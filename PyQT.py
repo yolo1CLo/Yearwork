@@ -64,17 +64,14 @@ class Quadratic(QMainWindow):
         self.ui.pushButton.clicked.connect (self.Return)
         self.result = self.ui.resultLabel.setText('Here the result will be displayed')
         
-        # if self.a == 0:
-        #     self.ui.resultLabel.setText("Can't divide by 0")
-        # else:
-        self.ui.a_DSB.valueChanged.connect(self.updateResult)
-        self.ui.b_DSB.valueChanged.connect(self.updateResult)
-        self.ui.c_DSB.valueChanged.connect(self.updateResult)
+        self.ui.a_DSB.valueChanged.connect(self.calcQuad)
+        self.ui.b_DSB.valueChanged.connect(self.calcQuad)
+        self.ui.c_DSB.valueChanged.connect(self.calcQuad)
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
 
-    def updateResult(self):
+    def calcQuad(self):
         self.a = self.ui.a_DSB.value()
         self.b = self.ui.b_DSB.value()
         self.c = self.ui.c_DSB.value()
@@ -85,7 +82,7 @@ class Quadratic(QMainWindow):
                 return None  
             elif discriminant == 0:
                 x = (-self.b) / (2*self.a)
-                self.ui.resultLabel.setText(f"x: {x1}")
+                self.ui.resultLabel.setText(f"x: {x}")
             else:
                 x1 = (-self.b + math.sqrt(discriminant)) / (2*self.a)
                 x2 = (-self.b - math.sqrt(discriminant)) / (2*self.a)
@@ -100,34 +97,40 @@ class Newton(QMainWindow):
         self.ui = ui_newt_screen_3.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
         self.m = self.ui.m_DSB.value()
         self.a = self.ui.a_DSB.value()
         self.F = self.ui.F_DSB.value()
 
         self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.pushButton_2.clicked.connect (self.calcNewton)
+        self.ui.a_DSB.valueChanged.connect(self.calcNewton)
+        self.ui.m_DSB.valueChanged.connect(self.calcNewton)
+        self.ui.F_DSB.valueChanged.connect(self.calcNewton) 
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
     def calcNewton (self):
+        self.m = self.ui.a_DSB.value()
+        self.a = self.ui.a_DSB.value()
+        self.F = self.ui.F_DSB.value()
         if self.m is None:
             try: 
                 self.m = self.F/self.a
-                print (f"The value of {self.F} divided by {self.a} is equal to the m being {self.m} kg.")
+                self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.a} is equal to the m being {self.m} kg.")
                 return self.m
             except ZeroDivisionError:
-                print("Error: Division by zero. ")
+                print("Can't divide by zero")
         elif self.a is None:
             try: 
                 self.a = self.F/self.m
-                print (f"The value of {self.F} divided by {self.m} is equal to the m being {self.a} kg.")
+                self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.m} is equal to the m being {self.a} kg.")
                 return self.a
             except ZeroDivisionError:
                 print("Error: Division by zero.")
         else: 
             self.F =  self.m * self.a
-            print (f"The value of {self.m} multiplicated by {self.a} is equal to the Force being {self.F}")
+            self.ui.resultLabel.setText(f"The value of {self.m} multiplicated by {self.a} is equal to the Force being {self.F}")
             return self.F
 
 class Work(QMainWindow):
@@ -143,11 +146,17 @@ class Work(QMainWindow):
         self.W = self.ui.W_DSB
 
         self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.pushButton_2.clicked.connect (self.calcWork)
+        self.ui.W_DSB.valueChanged.connect(self.calcWork)
+        self.ui.d_DSB.valueChanged.connect(self.calcWork)
+        self.ui.F_DSB.valueChanged.connect(self.calcWork) 
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
     def calcWork (self):
+        self.W = self.ui.W_DSB.value()
+        self.d = self.ui.d_DSB.value()
+        self.F = self.ui.F_DSB.value()
         if self.d is None:
             try:
                 self.d = self.W/math.cos(self.c)*self.F
@@ -158,20 +167,20 @@ class Work(QMainWindow):
         elif self.F is None:
             try:
                 self.F = self.W/self.d.math.cos(self.c)
-                print (f"The Fore is equal too {self.F}N")
+                self.ui.resultLabel.setText(f"The Fore is equal too {self.F}N")
                 return self.F
             except ZeroDivisionError:
                 print("Error: Division by zero.")
         elif self.c is None:
             try:
                 self.c = self.W/self.d*self.F
-                print (f"The value of the angle is equal too {self.c}.")
+                self.ui.resultLabel.setText(f"The value of the angle is equal too {self.c}.")
                 return self.c
             except ZeroDivisionError:
                 print("Error: Division by zero. ")
         else: 
             self.W = self.F * self.d * math.cos(self.c)
-            print (f"The Work for this calculus is equal too {self.W}J")
+            self.ui.resultLabel.setText(f"The Work for this calculus is equal too {self.W}J")
             return UserWarning
 
 class Graph(QMainWindow):
@@ -230,6 +239,7 @@ class Speed (QMainWindow):
         super(Speed, self).__init__()
         self.ui = ui_speed_screen_5.Ui_Form()
         self.ui.setupUi(self)
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
         self.t = self.ui.t_DSB.value()
         self.S = self.ui.S_DSB.value()
@@ -238,29 +248,35 @@ class Speed (QMainWindow):
         self.stackWidget = stackWidget
 
         self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.pushButton_2.clicked.connect (self.calcSpeed)
+        self.ui.S_DSB.valueChanged.connect(self.calcSpeed)
+        self.ui.t_DSB.valueChanged.connect(self.calcSpeed)
+        self.ui.d_DSB.valueChanged.connect(self.calcSpeed) 
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
     def calcSpeed (self):
+        self.S = self.ui.S_DSB.value()
+        self.d = self.ui.d_DSB.value()
+        self.t = self.ui.t_DSB.value()        
+
         if self.d is None:
             self.d =  self.v* self.t
-            print (f"The value of the distance is equal to { self.d}.")
+            self.ui.resultLabel.setText(f"The value of the distance is equal to { self.d}.")
             return  self.d
         elif self.t is None:
             try:
                 self.t =  self.d/ self.v
-                print (f"The value of the time is equal to {self.t}")
+                self.ui.resultLabel.setText(f"The value of the time is equal to {self.t}")
                 return  self.t
             except ZeroDivisionError:
-                print("Error: Division by zero. ")
+                self.ui.resultLabel.setText("Error: Division by zero. ")
         else: 
             try:
                 self.v =  self.d / self.t
-                print (f"The speed is equal to {self.v}m/s.")        
+                self.ui.resultLabel.setText(f"The speed is equal to {self.v}m/s.")        
                 return self.v
             except ZeroDivisionError:
-                print("Error: Division by zero. ")
+                self.ui.resultLabel.setText("Error: Division by zero. ")
 
 class Kinetic (QMainWindow):
     def __init__(self, stackWidget):
@@ -268,35 +284,41 @@ class Kinetic (QMainWindow):
         self.ui = ui_kine_screen_6.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
         self.m = self.ui.m_DSB.value()
         self.S = self.ui.S_DSB.value()
         self.E = self.ui.E_DSB.value()
         
         self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.pushButton_2.clicked.connect (self.calcKinetic)
+        self.ui.E_DSB.valueChanged.connect(self.calcKinetic)
+        self.ui.m_DSB.valueChanged.connect(self.calcKinetic)
+        self.ui.S_DSB.valueChanged.connect(self.calcKinetic) 
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
     def calcKinetic (self):
+        self.m = self.ui.m_DSB.value()
+        self.S = self.ui.S_DSB.value()
+        self.E = self.ui.E_DSB.value()
         c = 0.5
         if self.m is None:
             try:
                 self.m = self.K/(self.S**2) * c
-                print (f"The value of the mass is equal to {self.m}.")
+                self.ui.resultLabel.setText(f"The value of the mass is equal to {self.m}.")
                 return self.m
             except ZeroDivisionError:
                 print("Error: Division by zero. ")
         elif self.S is None:
             try:
                 self.S = math.sqrt(self.K/c*self.m)
-                print (f"The value of the speed is equal to {self.v}")
+                self.ui.resultLabel.setText(f"The value of the speed is equal to {self.v}")
                 return self.S
             except ZeroDivisionError:
-                print("Error: Division by zero.")
+                self.ui.resultLabel.setText("Error: Division by zero.")
         else: 
             self.K =  self.c* self.S**2 * self.m
-            print (f"The Kinetic Energy is equal to {self.K}N")
+            self.ui.resultLabel.setText(f"The Kinetic Energy is equal to {self.K}N")
             return self.K
 
 def main():

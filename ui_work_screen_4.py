@@ -36,9 +36,10 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(20, 280, 80, 23))
-        self.pushButton_2 = QPushButton(Form)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(140, 270, 80, 23))
+
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"resultLabel")
+        self.resultLabel.setGeometry(QRect(130, 280, 371, 20))
 
         self.retranslateUi(Form)
 
@@ -53,6 +54,5 @@ class Ui_Form(object):
         self.label.setText(QCoreApplication.translate("Form", u"Here you can calculate the Work Force", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"Input for Grade", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
     # retranslateUi
 
