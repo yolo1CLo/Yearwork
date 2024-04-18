@@ -6,26 +6,34 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(591, 416)
+
         self.frame = QFrame(Form)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(100, 130, 361, 81))
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
+
         self.a_DSB = QDoubleSpinBox(self.frame)
         self.a_DSB.setObjectName(u"a_DSB")
         self.a_DSB.setGeometry(QRect(10, 30, 62, 24))
         self.a_DSB.setMinimum(-99.989999999999995)
         self.a_DSB.setSingleStep(0.500000000000000)
+        self.a_DSB.setValue(1)
+
         self.b_DSB = QDoubleSpinBox(self.frame)
         self.b_DSB.setObjectName(u"b_DSB")
         self.b_DSB.setGeometry(QRect(130, 30, 62, 24))
         self.b_DSB.setMinimum(-99.989999999999995)
         self.b_DSB.setSingleStep(0.500000000000000)
+        self.b_DSB.setValue(1)
+
         self.c_DSB = QDoubleSpinBox(self.frame)
         self.c_DSB.setObjectName(u"c_DSB")
         self.c_DSB.setGeometry(QRect(260, 30, 62, 24))
         self.c_DSB.setMinimum(-99.989999999999995)
         self.c_DSB.setSingleStep(0.500000000000000)
+        self.c_DSB.setValue(1)
+
         self.label_3 = QLabel(self.frame)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(10, 10, 61, 16))
@@ -41,12 +49,14 @@ class Ui_Form(object):
         self.label_2 = QLabel(Form)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(190, 80, 171, 16))
+
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(10, 370, 80, 23))
-        self.pushButton_2 = QPushButton(Form)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(220, 230, 80, 23))
+
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"resultLabel")
+        self.resultLabel.setGeometry(QRect(90, 280, 371, 20))
 
         self.retranslateUi(Form)
 
@@ -61,6 +71,7 @@ class Ui_Form(object):
         self.label.setText(QCoreApplication.translate("Form", u"Here we will calculate the answers of a quadratic formula,", None))
         self.label_2.setText(QCoreApplication.translate("Form", u" in this form: ax\u00b2+bx+c = 0", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here is the result", None))
+
     # retranslateUi
 

@@ -55,21 +55,44 @@ class Quadratic(QMainWindow):
         super(Quadratic, self).__init__()
         self.ui = ui_quad_screen_2.Ui_Form()
         self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
         self.a = self.ui.a_DSB.value()
         self.b = self.ui.b_DSB.value()
         self.c = self.ui.c_DSB.value()
 
-        self.stackWidget = stackWidget
-        self.ui.pushButton_2.clicked.connect (self.calcQuadratic)
-    
-    def calcQuadratic(self):
+        self.ui.pushButton.clicked.connect (self.Return)
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
+        
+        # if self.a == 0:
+        #     self.ui.resultLabel.setText("Can't divide by 0")
+        # else:
+        self.ui.a_DSB.valueChanged.connect(self.updateResult)
+        self.ui.b_DSB.valueChanged.connect(self.updateResult)
+        self.ui.c_DSB.valueChanged.connect(self.updateResult)
+
+    def Return (self):
+        self.stackWidget.setCurrentIndex (1)
+
+    def updateResult(self):
+        self.a = self.ui.a_DSB.value()
+        self.b = self.ui.b_DSB.value()
+        self.c = self.ui.c_DSB.value()
         discriminant = self.b**2 - 4*self.a*self.c
-        if discriminant < 0:
-            print("The Discriminant is inferior to zero.")
-            return None  
-        x1 = (-self.b + math.sqrt(discriminant)) / (2*self.a)
-        x2 = (-self.b - math.sqrt(discriminant)) / (2*self.a)
-        print (x1, x2)
+        if self.a !=0:
+            if discriminant < 0:
+                self.ui.resultLabel.setText("The Discriminant is inferior to zero.")
+                return None  
+            elif discriminant == 0:
+                x = (-self.b) / (2*self.a)
+                self.ui.resultLabel.setText(f"x: {x1}")
+            else:
+                x1 = (-self.b + math.sqrt(discriminant)) / (2*self.a)
+                x2 = (-self.b - math.sqrt(discriminant)) / (2*self.a)
+                self.ui.resultLabel.setText(f"x1: {x1} andx2: {x2}")
+        else:
+            self.ui.resultLabel.setText("Can't divide by 0")
+
 
 class Newton(QMainWindow):
     def __init__(self, stackWidget):
