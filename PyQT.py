@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLin
 import sys
 import matplotlib.pyplot as plt
 import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
-import ui_newt_acceleration_8, ui_newt_force_9
+import ui_newt_acceleration_8, ui_newt_force_9, ui_work_D_10, ui_work_W_12, ui_work_F_11
 from ui_calc_screen_1 import Ui_MainWindow
 from ui_quad_screen_2 import Ui_Form
 from ui_newt_mass_7 import Ui_Form
@@ -13,6 +13,9 @@ from ui_work_screen_4 import Ui_Form
 from ui_newt_home_3 import Ui_Form
 from ui_newt_acceleration_8 import Ui_Form
 from ui_newt_force_9 import Ui_Form
+from ui_work_F_11 import Ui_Form
+from ui_work_W_12 import Ui_Form
+from ui_work_D_10 import Ui_Form
 import math
 
 class MyWindow(QMainWindow):
@@ -121,6 +124,21 @@ class Newt_mass (QMainWindow):
         self.ui = ui_newt_mass_7.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
+       self.result = self.ui.resultLabel.setText('Here the result will be displayed')
+        self.a = self.ui.a_DSB.value()
+        self.F = self.ui.f_DSB.value()
+        self.ui.a_DSB.valueChanged.connect(self.calcNewton)
+        self.ui.f_DSB.valueChanged.connect(self.calcNewton) 
+    
+    def calcNewton (self):
+        self.a = self.ui.a_DSB.value()
+        self.F = self.ui.f_DSB.value()
+        try: 
+            self.m = self.F/self.a
+            self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.a} is equal to the m being {self.m} kg.")
+            return self.m
+        except ZeroDivisionError:
+            print("Can't divide by zero")
 
 class Newt_acceleration (QMainWindow):
     def __init__(self, stackWidget):
@@ -136,55 +154,88 @@ class Newt_force(QMainWindow):
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
 
-class Work(QMainWindow):
+class Work_homepage(QMainWindow):
     def __init__(self, stackWidget):
-        super(Work, self).__init__()
+        super(Work_homepage, self).__init__()
         self.ui = ui_work_screen_4.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
 
-        self.d = self.ui.d_DSB.value()
-        self.F = self.ui.F_DSB.value()
-        self.c = self.ui.c_DSB.value()
-        self.W = self.ui.W_DSB
-
         self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.W_DSB.valueChanged.connect(self.calcWork)
-        self.ui.d_DSB.valueChanged.connect(self.calcWork)
-        self.ui.F_DSB.valueChanged.connect(self.calcWork) 
-        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
+        self.ui.pushButton_2.clicked.connect (self.gotoWo_D)
+        self.ui.pushButton_3.clicked.connect (self.gotoWo_F)
+        self.ui.pushButton_4.clicked.connect (self.gotoWo_W)
+    
+    def gotoWo_D (self):
+        self.stackWidget.setCurrentIndex (10)
+    def gotoWo_F (self):
+        self.stackWidget.setCurrentIndex (11)
+    def gotoWo_W (self):
+        self.stackWidget.setCurrentIndex (12)
+
+class Work_D (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Work_homepage, self).__init__()
+        self.ui = ui_work_D_10.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Work_W (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Work_homepage, self).__init__()
+        self.ui = ui_work_W_12.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Work_F (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Work_homepage, self).__init__()
+        self.ui = ui_work_F_11.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+#         self.d = self.ui.d_DSB.value()
+#         self.F = self.ui.F_DSB.value()
+#         self.c = self.ui.c_DSB.value()
+#         self.W = self.ui.W_DSB
+
+#         self.ui.pushButton.clicked.connect (self.Return)
+#         self.ui.W_DSB.valueChanged.connect(self.calcWork)
+#         self.ui.d_DSB.valueChanged.connect(self.calcWork)
+#         self.ui.F_DSB.valueChanged.connect(self.calcWork) 
+#         self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
-    def calcWork (self):
-        self.W = self.ui.W_DSB.value()
-        self.d = self.ui.d_DSB.value()
-        self.F = self.ui.F_DSB.value()
-        if self.d is None:
-            try:
-                self.d = self.W/math.cos(self.c)*self.F
-                print (f"The value of the distance is equal too {self.d}")
-                return self.d
-            except ZeroDivisionError:
-                print("Error: Division by zero. ")
-        elif self.F is None:
-            try:
-                self.F = self.W/self.d.math.cos(self.c)
-                self.ui.resultLabel.setText(f"The Fore is equal too {self.F}N")
-                return self.F
-            except ZeroDivisionError:
-                print("Error: Division by zero.")
-        elif self.c is None:
-            try:
-                self.c = self.W/self.d*self.F
-                self.ui.resultLabel.setText(f"The value of the angle is equal too {self.c}.")
-                return self.c
-            except ZeroDivisionError:
-                print("Error: Division by zero. ")
-        else: 
-            self.W = self.F * self.d * math.cos(self.c)
-            self.ui.resultLabel.setText(f"The Work for this calculus is equal too {self.W}J")
-            return UserWarning
+#     def calcWork (self):
+#         self.W = self.ui.W_DSB.value()
+#         self.d = self.ui.d_DSB.value()
+#         self.F = self.ui.F_DSB.value()
+#         if self.d is None:
+#             try:
+#                 self.d = self.W/math.cos(self.c)*self.F
+#                 print (f"The value of the distance is equal too {self.d}")
+#                 return self.d
+#             except ZeroDivisionError:
+#                 print("Error: Division by zero. ")
+#         elif self.F is None:
+#             try:
+#                 self.F = self.W/self.d.math.cos(self.c)
+#                 self.ui.resultLabel.setText(f"The Fore is equal too {self.F}N")
+#                 return self.F
+#             except ZeroDivisionError:
+#                 print("Error: Division by zero.")
+#         elif self.c is None:
+#             try:
+#                 self.c = self.W/self.d*self.F
+#                 self.ui.resultLabel.setText(f"The value of the angle is equal too {self.c}.")
+#                 return self.c
+#             except ZeroDivisionError:
+#                 print("Error: Division by zero. ")
+#         else: 
+#             self.W = self.F * self.d * math.cos(self.c)
+#             self.ui.resultLabel.setText(f"The Work for this calculus is equal too {self.W}J")
+#             return UserWarning
 
 class Graph(QMainWindow):
     def __init__(self):
@@ -333,12 +384,15 @@ def main():
     calc_window = Calc(stackWidget)
     quadr_window = Quadratic(stackWidget)
     newt_window = Newton_homepage(stackWidget)
-    work_window = Work(stackWidget)
+    work_window = Work_homepage(stackWidget)
     speed_window = Speed(stackWidget)
     kine_window = Kinetic(stackWidget)
     newt__window_m = Newt_mass(stackWidget)
     newt__window_a = Newt_acceleration(stackWidget)
     newt__window_F = Newt_force(stackWidget)
+    work_window_d = Work_D (stackWidget)
+    work_window_w = Work_W (stackWidget)
+    work_window_f = Work_F (stackWidget)
     # Add screens to the QStackedWidget
     stackWidget.addWidget(main_window)
     stackWidget.addWidget(calc_window)
@@ -350,6 +404,10 @@ def main():
     stackWidget.addWidget(newt__window_m)
     stackWidget.addWidget (newt__window_a)
     stackWidget.addWidget (newt__window_F)
+    stackWidget.addWidget (work_window_d)
+    stackWidget.addWidget (work_window_f)
+    stackWidget.addWidget (work_window_w)
+
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
     
