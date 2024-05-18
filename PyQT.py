@@ -2,13 +2,17 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
 import sys
 import matplotlib.pyplot as plt
-import ui_quad_screen_2, ui_newt_screen_3, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5
+import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
+import ui_newt_acceleration_8, ui_newt_force_9
 from ui_calc_screen_1 import Ui_MainWindow
 from ui_quad_screen_2 import Ui_Form
-from ui_newt_screen_3 import Ui_Form
+from ui_newt_mass_7 import Ui_Form
 from ui_work_screen_4 import Ui_Form
 from ui_speed_screen_5 import Ui_Form
 from ui_work_screen_4 import Ui_Form
+from ui_newt_home_3 import Ui_Form
+from ui_newt_acceleration_8 import Ui_Form
+from ui_newt_force_9 import Ui_Form
 import math
 
 class MyWindow(QMainWindow):
@@ -90,48 +94,47 @@ class Quadratic(QMainWindow):
         else:
             self.ui.resultLabel.setText("Can't divide by 0")
 
-
-class Newton(QMainWindow):
+class Newton_homepage(QMainWindow):
     def __init__(self, stackWidget):
-        super(Newton, self).__init__()
-        self.ui = ui_newt_screen_3.Ui_Form()
+        super(Newton_homepage, self).__init__()
+        self.ui = ui_newt_home_3.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
-        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
-        self.m = self.ui.m_DSB.value()
-        self.a = self.ui.a_DSB.value()
-        self.F = self.ui.F_DSB.value()
+        self.ui.pushButton_4.clicked.connect(self.Return)
+        self.ui.pushButton_1.clicked.connect (self.gotoNewt_mass)
+        self.ui.pushButton_2.clicked.connect (self.gotoNewt_acceleration)
+        self.ui.pushButton_3.clicked.connect (self.gotoNewt_force)
 
-        self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.a_DSB.valueChanged.connect(self.calcNewton)
-        self.ui.m_DSB.valueChanged.connect(self.calcNewton)
-        self.ui.F_DSB.valueChanged.connect(self.calcNewton) 
+    def gotoNewt_mass(self):
+        self.stackWidget.setCurrentIndex (7)
+    def gotoNewt_acceleration(self):
+        self.stackWidget.setCurrentIndex (8)
+    def gotoNewt_force(self):
+        self.stackWidget.setCurrentIndex (9)
+    def Return(self):
+        self.stackWidget.setCurrentIndex (3)
 
-    def Return (self):
-        self.stackWidget.setCurrentIndex (1)
-    def calcNewton (self):
-        self.m = self.ui.a_DSB.value()
-        self.a = self.ui.a_DSB.value()
-        self.F = self.ui.F_DSB.value()
-        if self.m is None:
-            try: 
-                self.m = self.F/self.a
-                self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.a} is equal to the m being {self.m} kg.")
-                return self.m
-            except ZeroDivisionError:
-                print("Can't divide by zero")
-        elif self.a is None:
-            try: 
-                self.a = self.F/self.m
-                self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.m} is equal to the m being {self.a} kg.")
-                return self.a
-            except ZeroDivisionError:
-                print("Error: Division by zero.")
-        else: 
-            self.F =  self.m * self.a
-            self.ui.resultLabel.setText(f"The value of {self.m} multiplicated by {self.a} is equal to the Force being {self.F}")
-            return self.F
+class Newt_mass (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Newt_mass, self).__init__()
+        self.ui = ui_newt_mass_7.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Newt_acceleration (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Newt_acceleration, self).__init__()
+        self.ui = ui_newt_acceleration_8.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Newt_force(QMainWindow):
+    def __init__(self, stackWidget):
+        super(Newt_force, self).__init__()
+        self.ui = ui_newt_force_9.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
 
 class Work(QMainWindow):
     def __init__(self, stackWidget):
@@ -329,10 +332,13 @@ def main():
     main_window = MyWindow(stackWidget)
     calc_window = Calc(stackWidget)
     quadr_window = Quadratic(stackWidget)
-    newt_window = Newton(stackWidget)
+    newt_window = Newton_homepage(stackWidget)
     work_window = Work(stackWidget)
     speed_window = Speed(stackWidget)
     kine_window = Kinetic(stackWidget)
+    newt__window_m = Newt_mass(stackWidget)
+    newt__window_a = Newt_acceleration(stackWidget)
+    newt__window_F = Newt_force(stackWidget)
     # Add screens to the QStackedWidget
     stackWidget.addWidget(main_window)
     stackWidget.addWidget(calc_window)
@@ -341,6 +347,9 @@ def main():
     stackWidget.addWidget(work_window)
     stackWidget.addWidget(speed_window)
     stackWidget.addWidget(kine_window)
+    stackWidget.addWidget(newt__window_m)
+    stackWidget.addWidget (newt__window_a)
+    stackWidget.addWidget (newt__window_F)
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
     
