@@ -124,7 +124,7 @@ class Newt_mass (QMainWindow):
         self.ui = ui_newt_mass_7.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
-       self.result = self.ui.resultLabel.setText('Here the result will be displayed')
+        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
         self.a = self.ui.a_DSB.value()
         self.F = self.ui.f_DSB.value()
         self.ui.a_DSB.valueChanged.connect(self.calcNewton)
