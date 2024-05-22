@@ -4,6 +4,7 @@ import sys
 import matplotlib.pyplot as plt
 import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
 import ui_newt_acceleration_8, ui_newt_force_9, ui_work_D_10, ui_work_W_12, ui_work_F_11, ui_speed_distance_13, ui_speed_speed_15, ui_speed_time_14
+import ui_kin_E_18, ui_kin_m_16, ui_kin_s_17
 from ui_calc_screen_1 import Ui_MainWindow
 from ui_quad_screen_2 import Ui_Form
 from ui_newt_mass_7 import Ui_Form
@@ -19,6 +20,9 @@ from ui_work_D_10 import Ui_Form
 from ui_speed_distance_13 import Ui_Form
 from ui_speed_time_14 import Ui_Form
 from ui_speed_speed_15 import Ui_Form
+from ui_kin_m_16 import Ui_Form
+from ui_kin_s_17 import Ui_Form
+from ui_kin_E_18 import Ui_Form
 import math
 
 class MyWindow(QMainWindow):
@@ -245,7 +249,8 @@ class Work_W (QMainWindow):
     def calcWork (self):
         self.W = self.F * self.d * math.cos(self.c)
         self.ui.resultLabel.setText(f"The Work for this calculus is equal too {self.W}J")
-                
+        return self.W     
+
 class Work_F (QMainWindow):
     def __init__(self, stackWidget):
         super(Work_F, self).__init__()
@@ -259,6 +264,8 @@ class Work_F (QMainWindow):
         self.ui.W_DSB.valueChanged.connect(self.calcWork)
         self.ui.c_DSB.valueChanged.connect(self.calcWork) 
         self.ui.d_DSB.valueChanged.connect(self.calcWork)
+        self.ui.pushButton.clicked.connect(self.Return)
+
         
     def calcWork (self):
         try:
@@ -343,52 +350,29 @@ class Speed (QMainWindow):
     def Return(self):
         self.stackWidget.setCurrentIndex (5)
 
-    
-    #     self.result = self.ui.resultLabel.setText('Here the result will be displayed')
-
-    #     self.t = self.ui.t_DSB.value()
-    #     self.S = self.ui.S_DSB.value()
-    #     self.d = self.ui.d_DSB.value()        
-        
-    #     self.stackWidget = stackWidget
-
-    #     self.ui.pushButton.clicked.connect (self.Return)
-    #     self.ui.S_DSB.valueChanged.connect(self.calcSpeed)
-    #     self.ui.t_DSB.valueChanged.connect(self.calcSpeed)
-    #     self.ui.d_DSB.valueChanged.connect(self.calcSpeed) 
-
-    # def Return (self):
-    #     self.stackWidget.setCurrentIndex (1)
-    # def calcSpeed (self):
-    #     self.S = self.ui.S_DSB.value()
-    #     self.d = self.ui.d_DSB.value()
-    #     self.t = self.ui.t_DSB.value()        
-
-    #     if self.d is None:
-    #         self.d =  self.v* self.t
-    #         self.ui.resultLabel.setText(f"The value of the distance is equal to { self.d}.")
-    #         return  self.d
-    #     elif self.t is None:
-    #         try:
-    #             self.t =  self.d/ self.v
-    #             self.ui.resultLabel.setText(f"The value of the time is equal to {self.t}")
-    #             return  self.t
-    #         except ZeroDivisionError:
-    #             self.ui.resultLabel.setText("Error: Division by zero. ")
-    #     else: 
-    #         try:
-    #             self.v =  self.d / self.t
-    #             self.ui.resultLabel.setText(f"The speed is equal to {self.v}m/s.")        
-    #             return self.v
-    #         except ZeroDivisionError:
-    #             self.ui.resultLabel.setText("Error: Division by zero. ")
-
 class Speed_distance (QMainWindow):
     def __init__(self, stackWidget):
         super(Speed_distance, self).__init__()
         self.ui = ui_speed_distance_13.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
+
+        self.t = self.ui.t_DSB.value()
+        self.s = self.ui.s_DSB.value()
+        self.ui.t_DSB.valueChanged.connect(self.calcSpeed) 
+        self.ui.s_DSB.valueChanged.connect(self.calcSpeed)
+        self.ui.pushButton.clicked.connect(self.Return)
+
+    def calcSpeed (self):
+        try:
+            self.d = self.t/self.s
+            self.ui.resultLabel.setText(f"The distance is equal too {self.d}")
+            return self.d
+        except ZeroDivisionError:
+            print("Error: Division by zero.")
+
+    def Return (self):
+        self.stackWidget.setCurrentIndex (1)
 
 class Speed_time (QMainWindow):
     def __init__(self, stackWidget):
@@ -397,12 +381,44 @@ class Speed_time (QMainWindow):
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
 
+        self.ui.t_DSB.valueChanged.connect(self.calcSpeed) 
+        self.ui.s_DSB.valueChanged.connect(self.calcSpeed)
+        self.ui.pushButton.clicked.connect(self.Return)
+
+
+    def calcSpeed (self):
+        try:
+            self.t = self.s * self.d
+            self.ui.resultLabel.setText(f"The time is equal too {self.t}")
+            return self.t
+        except ZeroDivisionError:
+            print("Error: Division by zero.")
+
+    def Return (self):
+        self.stackWidget.setCurrentIndex (1)
+
 class Speed_speed (QMainWindow):
     def __init__(self, stackWidget):
         super(Speed_speed, self).__init__()
         self.ui = ui_speed_speed_15.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
+
+        self.ui.t_DSB.valueChanged.connect(self.calcSpeed) 
+        self.ui.d_DSB.valueChanged.connect(self.calcSpeed)
+        self.ui.pushButton.clicked.connect(self.Return)
+
+
+    def calcSpeed (self):
+        try:
+            self.s = self.d/self.t
+            self.ui.resultLabel.setText(f"The speed is equal too {self.s}")
+            return self.s
+        except ZeroDivisionError:
+            print("Error: Division by zero.")
+
+    def Return (self):
+        self.stackWidget.setCurrentIndex (1)
 
 class Kinetic (QMainWindow):
     def __init__(self, stackWidget):
@@ -412,46 +428,79 @@ class Kinetic (QMainWindow):
         self.stackWidget = stackWidget
         self.result = self.ui.resultLabel.setText('Here the result will be displayed')
 
-        self.m = self.ui.m_DSB.value()
-        self.S = self.ui.S_DSB.value()
-        self.E = self.ui.E_DSB.value()
-        
-        self.ui.pushButton.clicked.connect (self.Return)
-        self.ui.E_DSB.valueChanged.connect(self.calcKinetic)
-        self.ui.m_DSB.valueChanged.connect(self.calcKinetic)
-        self.ui.S_DSB.valueChanged.connect(self.calcKinetic) 
+        self.ui.pushButton.clicked.connect(self.Return)
+        self.ui.pushButton_2.clicked.connect (self.gotokin_mass)
+        self.ui.pushButton_3.clicked.connect (self.gotokin_speed)
+        self.ui.pushButton_4.clicked.connect (self.gotokin_energy)
 
-    def Return (self):
+    def gotokin_mass(self):
+        self.stackWidget.setCurrentIndex (16)
+    def gotokin_speed(self):
+        self.stackWidget.setCurrentIndex (17)
+    def gotokin_energy(self):
+        self.stackWidget.setCurrentIndex (18)
+    def Return(self):
         self.stackWidget.setCurrentIndex (1)
-    def calcKinetic (self):
-        self.m = self.ui.m_DSB.value()
-        self.S = self.ui.S_DSB.value()
-        self.E = self.ui.E_DSB.value()
-        c = 0.5
-        if self.m is None:
-            try:
-                self.m = self.K/(self.S**2) * c
-                self.ui.resultLabel.setText(f"The value of the mass is equal to {self.m}.")
-                return self.m
-            except ZeroDivisionError:
-                print("Error: Division by zero. ")
-        elif self.S is None:
-            try:
-                self.S = math.sqrt(self.K/c*self.m)
-                self.ui.resultLabel.setText(f"The value of the speed is equal to {self.v}")
-                return self.S
-            except ZeroDivisionError:
-                self.ui.resultLabel.setText("Error: Division by zero.")
-        else: 
-            self.K =  self.c* self.S**2 * self.m
-            self.ui.resultLabel.setText(f"The Kinetic Energy is equal to {self.K}N")
-            return self.K
+
+    #     self.m = self.ui.m_DSB.value()
+    #     self.S = self.ui.S_DSB.value()
+    #     self.E = self.ui.E_DSB.value()
+        
+    #     self.ui.pushButton.clicked.connect (self.Return)
+    #     self.ui.E_DSB.valueChanged.connect(self.calcKinetic)
+    #     self.ui.m_DSB.valueChanged.connect(self.calcKinetic)
+    #     self.ui.S_DSB.valueChanged.connect(self.calcKinetic) 
+
+    # def Return (self):
+    #     self.stackWidget.setCurrentIndex (1)
+    # def calcKinetic (self):
+    #     self.m = self.ui.m_DSB.value()
+    #     self.S = self.ui.S_DSB.value()
+    #     self.E = self.ui.E_DSB.value()
+    #     c = 0.5
+    #     if self.m is None:
+    #         try:
+    #             self.m = self.K/(self.S**2) * c
+    #             self.ui.resultLabel.setText(f"The value of the mass is equal to {self.m}.")
+    #             return self.m
+    #         except ZeroDivisionError:
+    #             print("Error: Division by zero. ")
+    #     elif self.S is None:
+    #         try:
+    #             self.S = math.sqrt(self.K/c*self.m)
+    #             self.ui.resultLabel.setText(f"The value of the speed is equal to {self.v}")
+    #             return self.S
+    #         except ZeroDivisionError:
+    #             self.ui.resultLabel.setText("Error: Division by zero.")
+    #     else: 
+    #         self.K =  self.c* self.S**2 * self.m
+    #         self.ui.resultLabel.setText(f"The Kinetic Energy is equal to {self.K}N")
+    #         return self.K
+
+class Kine_mass (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Kine_mass, self).__init__()
+        self.ui = ui_kin_m_16.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Kine_speed (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Kine_speed, self).__init__()
+        self.ui = ui_kin_s_17.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
+
+class Kine_kine (QMainWindow):
+    def __init__(self, stackWidget):
+        super(Kine_kine, self).__init__()
+        self.ui = ui_kin_E_18.Ui_Form()
+        self.ui.setupUi(self)
+        self.stackWidget = stackWidget
 
 def main():
     app = QApplication(sys.argv) #QWidget: Must construct a QApplication before a QWidget
     stackWidget = QtWidgets.QStackedWidget()  # Centralized QStackedWidget
-    
-    # Create screen instances and pass the shared QStackedWidget to them
     main_window = MyWindow(stackWidget)
     calc_window = Calc(stackWidget)
     quadr_window = Quadratic(stackWidget)
@@ -468,7 +517,10 @@ def main():
     speed_window_d = Speed_distance (stackWidget)
     speed_window_t = Speed_time(stackWidget)
     speed_window_s = Speed_speed (stackWidget)
-    # Add screens to the QStackedWidget
+    kine_window_m = Kine_mass(stackWidget)
+    kine_window_s = Kine_speed(stackWidget)
+    kine_window_k = Kine_kine(stackWidget)
+
     stackWidget.addWidget(main_window)
     stackWidget.addWidget(calc_window)
     stackWidget.addWidget(quadr_window)
@@ -485,6 +537,9 @@ def main():
     stackWidget.addWidget (speed_window_d)
     stackWidget.addWidget (speed_window_t)
     stackWidget.addWidget (speed_window_s)
+    stackWidget.addWidget (kine_window_m)
+    stackWidget.addWidget (kine_window_s)
+    stackWidget.addWidget (kine_window_k)
 
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
