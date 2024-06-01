@@ -95,7 +95,7 @@ def Kinetic_Energy (variables):
         KE =  c* v**2 * m
         print (f"The Kinetic Energy is equal to {KE}N")
         return KE
-#########################################################
+
 print ("You can choose bewteen: Quadratic, Newton, Work, Speed, Kinetic energy")
 type = input("What do you want? = ")
 if type.lower() == 'quadratic'.lower():
