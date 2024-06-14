@@ -15,6 +15,9 @@ class Ui_Form(object):
         self.d_DSB = QDoubleSpinBox(Form)
         self.d_DSB.setObjectName(u"d_DSB")
         self.d_DSB.setGeometry(QRect(150, 170, 62, 24))
+        self.w_DSB = QDoubleSpinBox(Form)
+        self.w_DSB.setObjectName(u"w_DSB")
+        self.w_DSB.setGeometry(QRect(150, 170, 62, 24))
         self.label_3 = QLabel(Form)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(260, 130, 131, 51))
@@ -36,7 +39,9 @@ class Ui_Form(object):
         self.label_4 = QLabel(Form)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(190, 100, 241, 16))
-
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
@@ -51,5 +56,7 @@ class Ui_Form(object):
         self.label_2.setText(QCoreApplication.translate("Form", u"Input for Work", None))
         self.label.setText("")
         self.label_4.setText(QCoreApplication.translate("Form", u"Now we are looking for the Distance", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 

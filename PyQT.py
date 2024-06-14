@@ -182,9 +182,9 @@ class Newt_force(QMainWindow):
 
     def calcNewton (self):
         self.m = self.ui.m_DSB.value()
-        self.F = self.ui.f_DSB.value()
+        self.a = self.ui.a_DSB.value()
         try: 
-            F = self.m*self.a
+            self.F = self.m*self.a
             self.ui.resultLabel.setText(f"The value of the Force is {self.F}")
             return self.F
         except ZeroDivisionError:
@@ -220,13 +220,14 @@ class Work_D (QMainWindow):
         self.F = self.ui.F_DSB.value()
         self.c = self.ui.c_DSB.value()
         self.d = self.ui.d_DSB.value()
+        self.w = self.ui.w_DSB.value()
         self.ui.F_DSB.valueChanged.connect(self.calcWork)
         self.ui.c_DSB.valueChanged.connect(self.calcWork) 
-        self.ui.d_DSB.valueChanged.connect(self.calcWork)
+        self.ui.w_DSB.valueChanged.connect(self.calcWork)
         
     def calcWork (self):
         try:
-            self.d = self.W/math.cos(self.c)*self.F
+            self.d = self.c/(math.cos(self.c)*self.F)
             print (f"The value of the distance is equal too {self.d}")                 
             return self.d
         except ZeroDivisionError:
@@ -381,7 +382,7 @@ class Speed_time (QMainWindow):
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
 
-        self.ui.t_DSB.valueChanged.connect(self.calcSpeed) 
+        self.ui.d_DSB.valueChanged.connect(self.calcSpeed) 
         self.ui.s_DSB.valueChanged.connect(self.calcSpeed)
         self.ui.pushButton.clicked.connect(self.Return)
 
@@ -426,8 +427,6 @@ class Kinetic (QMainWindow):
         self.ui = ui_kine_screen_6.Ui_Form()
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
-        self.result = self.ui.resultLabel.setText('Here the result will be displayed')
-
         self.ui.pushButton.clicked.connect(self.Return)
         self.ui.pushButton_2.clicked.connect (self.gotokin_mass)
         self.ui.pushButton_3.clicked.connect (self.gotokin_speed)
@@ -481,7 +480,7 @@ class Kine_speed (QMainWindow):
         c = 0.5
         try:
             self.S = math.sqrt(self.K/c*self.m)
-            self.ui.resultLabel.setText(f"The value of the speed is equal to {self.v}")
+            self.ui.reslabel.setText(f"The value of the speed is equal to {self.v}")
             return self.S
         except ZeroDivisionError:
             self.ui.resultLabel.setText("Error: Division by zero.")
@@ -496,7 +495,7 @@ class Kine_kine (QMainWindow):
         self.ui.setupUi(self)
         self.stackWidget = stackWidget
 
-        self.ui.e_DSB.valueChanged.connect(self.calcKine) 
+        self.ui.S_DSB.valueChanged.connect(self.calcKine) 
         self.ui.m_DSB.valueChanged.connect(self.calcKine)
         self.ui.pushButton.clicked.connect(self.Return)
 

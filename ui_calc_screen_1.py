@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox, QMenuBar, QStatusBar
-from PyQt5.QtCore import QRect,QCoreApplication,QMetaObject 
+from PyQt5.QtCore import QRect,QCoreApplication,QMetaObject
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -51,5 +51,6 @@ class Ui_MainWindow(object):
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Work", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hi, here you can calculate your unkown element of your formula", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"<- return", None))
+
     # retranslateUi
     

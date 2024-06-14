@@ -27,7 +27,9 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(10, 260, 80, 23))
-
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
@@ -40,5 +42,7 @@ class Ui_Form(object):
         self.label_4.setText(QCoreApplication.translate("Form", u"Input for speed", None))
         self.label.setText(QCoreApplication.translate("Form", u"Now we are looking for the distance", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 

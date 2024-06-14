@@ -55,8 +55,8 @@ class Ui_Form(object):
         self.pushButton.setGeometry(QRect(10, 370, 80, 23))
 
         self.resultLabel = QLabel(Form)
-        self.resultLabel.setObjectName(u"resultLabel")
-        self.resultLabel.setGeometry(QRect(90, 280, 371, 20))
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211,500))
 
         self.retranslateUi(Form)
 
@@ -71,7 +71,7 @@ class Ui_Form(object):
         self.label.setText(QCoreApplication.translate("Form", u"Here we will calculate the answers of a quadratic formula,", None))
         self.label_2.setText(QCoreApplication.translate("Form", u" in this form: ax\u00b2+bx+c = 0", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
-        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here is the result", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
 
     # retranslateUi
 

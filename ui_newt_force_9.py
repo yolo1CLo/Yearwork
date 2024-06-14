@@ -21,8 +21,10 @@ class Ui_Form(object):
         self.label_4 = QLabel(Form)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(260, 170, 101, 31))
-
-        self.retranslateUi(Form)
+        self.reslabel = QLabel(Form)
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
 
         QMetaObject.connectSlotsByName(Form)
     # setupUi
@@ -32,5 +34,7 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Mass", None))
         self.label.setText(QCoreApplication.translate("Form", u"Now we are looking for the Force", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Acceleration", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 

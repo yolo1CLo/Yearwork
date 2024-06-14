@@ -24,10 +24,10 @@ class Ui_Form(object):
         self.pushButton_2 = QPushButton(Form)
         self.pushButton_2.setObjectName(u"pushButton_2")
         self.pushButton_2.setGeometry(QRect(180, 190, 80, 23))
-        self.label = QLabel(Form)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(120, 30, 211, 16))
-
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
+        
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
@@ -39,6 +39,6 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for mass", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Input for speed", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Now we are looking for the energy", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
     # retranslateUi
 

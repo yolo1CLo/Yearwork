@@ -21,6 +21,9 @@ class Ui_Form(object):
         self.label_4 = QLabel(Form)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(520, 160, 101, 31))
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
 
         self.retranslateUi(Form)
 
@@ -32,5 +35,7 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for mass", None))
         self.label.setText(QCoreApplication.translate("Form", u"Now we are looking for the acceleration", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Input for Force", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 

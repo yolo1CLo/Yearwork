@@ -27,7 +27,9 @@ class Ui_Form(object):
         self.label_3 = QLabel(Form)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(230, 100, 101, 31))
-
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
@@ -40,5 +42,7 @@ class Ui_Form(object):
         self.label_2.setText(QCoreApplication.translate("Form", u"Input for distance", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Input for time", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 

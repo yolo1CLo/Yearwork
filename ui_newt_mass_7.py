@@ -27,6 +27,9 @@ class Ui_Form(object):
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(490, 70, 211, 16))
+        self.resultLabel = QLabel(Form)
+        self.resultLabel.setObjectName(u"label")
+        self.resultLabel.setGeometry(QRect(130, 20, 211, 500))
 
         self.retranslateUi(Form)
 
@@ -40,5 +43,7 @@ class Ui_Form(object):
         self.pushButton.setText(QCoreApplication.translate("Form", u"<- Return", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"Calculate", None))
         self.label.setText(QCoreApplication.translate("Form", u"Now we are looking for the mass", None))
+        self.resultLabel.setText(QCoreApplication.translate("Form", u"Here results will be showed", None))
+
     # retranslateUi
 
