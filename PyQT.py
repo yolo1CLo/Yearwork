@@ -96,11 +96,11 @@ class Quadratic(QMainWindow):
                 return None  
             elif discriminant == 0:
                 x = (-self.b) / (2*self.a)
-                self.ui.resultLabel.setText(f"x: {x}")
+                self.ui.resultLabel.setText(f"x: {x:.4f}")
             else:
                 x1 = (-self.b + math.sqrt(discriminant)) / (2*self.a)
                 x2 = (-self.b - math.sqrt(discriminant)) / (2*self.a)
-                self.ui.resultLabel.setText(f"x1: {x1} andx2: {x2}")
+                self.ui.resultLabel.setText(f"x1: {x1:.4f} and x2: {x2:.4f}")
         else:
             self.ui.resultLabel.setText("Can't divide by 0")
 
