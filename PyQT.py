@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
 import sys
+import math
 import matplotlib.pyplot as plt
 import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
 import ui_newt_acceleration_8, ui_newt_force_9, ui_work_D_10, ui_work_W_12, ui_work_F_11, ui_speed_distance_13, ui_speed_speed_15, ui_speed_time_14
@@ -31,11 +32,12 @@ class MyWindow(QMainWindow):
         uic.loadUi('main_screen_0.ui', self)  # Load the screen.ui file parameters
         self.stackWidget = stackWidget
         self.pushButton.clicked.connect(self.gotoCalc)  # Assuming pushButton exists in screen1.ui
-        self.graph = Graph()
-        self.pushButton_2.clicked.connect (self.graph.generate_graph)
+        self.pushButton_2.clicked.connect (self.generate_graph)
 
     def gotoCalc(self):
         self.stackWidget.setCurrentIndex(1)
+    def generate_graph (self):
+        self.GraphGenerator()
 
 class Calc(QMainWindow):
     def __init__(self, stackWidget):
@@ -96,11 +98,11 @@ class Quadratic(QMainWindow):
                 return None  
             elif discriminant == 0:
                 x = (-self.b) / (2*self.a)
-                self.ui.resultLabel.setText(f"x: {x:.4f}")
+                self.ui.resultLabel.setText(f"x: {x}")
             else:
                 x1 = (-self.b + math.sqrt(discriminant)) / (2*self.a)
                 x2 = (-self.b - math.sqrt(discriminant)) / (2*self.a)
-                self.ui.resultLabel.setText(f"x1: {x1:.4f} and x2: {x2:.4f}")
+                self.ui.resultLabel.setText(f"x1: {x1:.4f} andx2: {x2:.4f}")
         else:
             self.ui.resultLabel.setText("Can't divide by 0")
 
@@ -142,10 +144,10 @@ class Newt_mass (QMainWindow):
         self.F = self.ui.f_DSB.value()
         try: 
             self.m = self.F/self.a
-            self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.a} is equal to the m being {self.m} kg.")
+            self.ui.resultLabel.setText(f"The mass is equal to {self.m:.2f} kg.")
             return self.m
         except ZeroDivisionError:
-            print("Can't divide by zero")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
 class Newt_acceleration (QMainWindow):
     def __init__(self, stackWidget):
@@ -164,10 +166,10 @@ class Newt_acceleration (QMainWindow):
         self.F = self.ui.f_DSB.value()
         try: 
             a = self.F/self.m
-            self.ui.resultLabel.setText(f"The value of {self.F} divided by {self.m} is equal to the m being {a} kg.")
+            self.ui.resultLabel.setText(f"The acceleration is equal to {a:.2f} .")
             return self.m
         except ZeroDivisionError:
-            print("Can't divide by zero")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
 class Newt_force(QMainWindow):
     def __init__(self, stackWidget):
@@ -185,10 +187,10 @@ class Newt_force(QMainWindow):
         self.a = self.ui.a_DSB.value()
         try: 
             self.F = self.m*self.a
-            self.ui.resultLabel.setText(f"The value of the Force is {self.F}")
+            self.ui.resultLabel.setText(f"The value of the Force is {self.F:.2f}")
             return self.F
         except ZeroDivisionError:
-            print("Can't divide by zero")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
 class Work_homepage(QMainWindow):
     def __init__(self, stackWidget):
@@ -228,10 +230,10 @@ class Work_D (QMainWindow):
     def calcWork (self):
         try:
             self.d = self.c/(math.cos(self.c)*self.F)
-            print (f"The value of the distance is equal too {self.d}")                 
+            print (f"The value of the distance is equal too {self.d:.2f}")                 
             return self.d
         except ZeroDivisionError:
-            print("Error: Division by zero. ")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
 class Work_W (QMainWindow):
     def __init__(self, stackWidget):
@@ -249,7 +251,7 @@ class Work_W (QMainWindow):
         
     def calcWork (self):
         self.W = self.F * self.d * math.cos(self.c)
-        self.ui.resultLabel.setText(f"The Work for this calculus is equal too {self.W}J")
+        self.ui.resultLabel.setText(f"The Work is equal too {self.W:.2f}J")
         return self.W     
 
 class Work_F (QMainWindow):
@@ -266,69 +268,53 @@ class Work_F (QMainWindow):
         self.ui.c_DSB.valueChanged.connect(self.calcWork) 
         self.ui.d_DSB.valueChanged.connect(self.calcWork)
         self.ui.pushButton.clicked.connect(self.Return)
-
         
     def calcWork (self):
         try:
             self.F = self.W/self.d.math.cos(self.c)
-            self.ui.resultLabel.setText(f"The Fore is equal too {self.F}N")
+            self.ui.resultLabel.setText(f"The Fore is equal too {self.F:.4f}N")
             return self.F
         except ZeroDivisionError:
-            print("Error: Division by zero.")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
 
-class Graph(QMainWindow):
-    def __init__(self):
-        super(Graph,self ).__init__()
+class GraphGenerator(QMainWindow):
+    def __init__(self, data_file):
+        self.data_file = data_file
+        self.data = self.load_data()
 
-        self.setWindowTitle("Graph Generator")
-
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
-
-        self.layout = QVBoxLayout()
-        self.central_widget.setLayout(self.layout)
-
-        self.x_label = QLabel("Enter X Values:")
-        self.layout.addWidget(self.x_label)
-        self.x_entries = []
-        self.y_label = QLabel("Enter Y Values:")
-        self.layout.addWidget(self.y_label)
-        self.y_entries = []
-
-        for i in range(5):  # Adjust the range as per your requirement
-            x_entry = QLineEdit()
-            self.layout.addWidget(x_entry)
-            self.x_entries.append(x_entry)
-
-            y_entry = QLineEdit()
-            self.layout.addWidget(y_entry)
-            self.y_entries.append(y_entry)
-
-        self.generate_button = QPushButton("Generate Graph")
-        self.generate_button.clicked.connect(self.generate_graph)
-        self.layout.addWidget(self.generate_button)
-
-    def generate_graph(self):
+    def load_data(self):
+        data = []
         try:
-            x_values = [float(x_entry.text()) for x_entry in self.x_entries if x_entry.text().strip()]
-            y_values = [float(y_entry.text()) for y_entry in self.y_entries if y_entry.text().strip()]
-        except ValueError:
-            QMessageBox.critical(self, "Error", "Please enter valid numbers for all data points.")
+            with open(self.data_file, 'r') as f:
+                for line in f:
+                    x, y = map(float, line.strip().split(','))
+                    data.append((x, y))
+        except FileNotFoundError:
+            print("Data file not found.")
+        return data
+
+    def plot_graph(self):
+        if not self.data:
+            print("No data to plot.")
             return
 
-        if len(x_values) == 0 or len(y_values) == 0:
-            QMessageBox.critical(self, "Error", "Please enter values for all data points.")
-            return
+        x_values, y_values = zip(*self.data)
 
-        plt.plot(x_values, y_values)
-        plt.xlabel('X-axis')
-        plt.ylabel('Y-axis')
-        plt.title('Graph')
+        plt.figure(figsize=(8, 6))
+        plt.plot(x_values, y_values, marker='o', linestyle='-', color='b')
+
+        plt.title('User Input Data Graph')
+        plt.xlabel('X values')
+        plt.ylabel('Y values')
         plt.grid(True)
         plt.show()
+
+if __name__ == '__main__':
+    graph_generator = GraphGenerator('data.txt')
+    graph_generator.plot_graph()
 
 class Speed (QMainWindow):
     def __init__(self, stackWidget):
@@ -367,11 +353,10 @@ class Speed_distance (QMainWindow):
     def calcSpeed (self):
         try:
             self.d = self.t/self.s
-            self.ui.resultLabel.setText(f"The distance is equal too {self.d}")
+            self.ui.resultLabel.setText(f"The distance is equal too {self.d:.2f}")
             return self.d
         except ZeroDivisionError:
-            print("Error: Division by zero.")
-
+            self.ui.resultLabel.setText("Can't divide by Zero")
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
 
@@ -390,10 +375,10 @@ class Speed_time (QMainWindow):
     def calcSpeed (self):
         try:
             self.t = self.s * self.d
-            self.ui.resultLabel.setText(f"The time is equal too {self.t}")
+            self.ui.resultLabel.setText(f"The time is equal too {self.t:.2f}")
             return self.t
         except ZeroDivisionError:
-            print("Error: Division by zero.")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
@@ -413,10 +398,10 @@ class Speed_speed (QMainWindow):
     def calcSpeed (self):
         try:
             self.s = self.d/self.t
-            self.ui.resultLabel.setText(f"The speed is equal too {self.s}")
+            self.ui.resultLabel.setText(f"The speed is equal too {self.s:.2f}")
             return self.s
         except ZeroDivisionError:
-            print("Error: Division by zero.")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
@@ -457,10 +442,10 @@ class Kine_mass (QMainWindow):
         c = 0.5
         try:
             self.m = self.K/(self.S**2) * c
-            self.ui.resultLabel.setText(f"The value of the mass is equal to {self.m}.")
+            self.ui.resultLabel.setText(f"The value of the mass is equal to {self.m:.2f}.")
             return self.m
         except ZeroDivisionError:
-            print("Error: Division by zero. ")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
@@ -480,10 +465,10 @@ class Kine_speed (QMainWindow):
         c = 0.5
         try:
             self.S = math.sqrt(self.K/c*self.m)
-            self.ui.reslabel.setText(f"The value of the speed is equal to {self.v}")
+            self.ui.reslabel.setText(f"The value of the speed is equal to {self.v:.2f}")
             return self.S
         except ZeroDivisionError:
-            self.ui.resultLabel.setText("Error: Division by zero.")
+            self.ui.resultLabel.setText("Can't divide by Zero")
 
     def Return (self):
         self.stackWidget.setCurrentIndex (1)
@@ -502,7 +487,7 @@ class Kine_kine (QMainWindow):
     def calcKine (self):
         c = 0.5
         self.K =  self.c* self.S**2 * self.m
-        self.ui.resultLabel.setText(f"The Kinetic Energy is equal to {self.K}N")
+        self.ui.resultLabel.setText(f"The Kinetic Energy is equal to {self.K:.2f}N")
         return self.K
 
     def Return (self):
