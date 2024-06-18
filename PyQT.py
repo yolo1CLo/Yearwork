@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
 import sys
+import os
 import math
 import graph 
 import matplotlib.pyplot as plt
@@ -30,6 +31,7 @@ import math
 class MyWindow(QMainWindow):
     def __init__(self, stackWidget):
         super(MyWindow, self).__init__()
+        print(os.getcwd())
         uic.loadUi('main_screen_0.ui', self)  # Load the screen.ui file parameters
         self.stackWidget = stackWidget
         self.pushButton.clicked.connect(self.gotoCalc)  # Assuming pushButton exists in screen1.ui
@@ -282,7 +284,7 @@ class Work_F (QMainWindow):
         self.stackWidget.setCurrentIndex (1)
 
 class GraphGenerator(QMainWindow):
-    def __init__(self, stackWidget,data_file):
+    def __init__(self, stackWidget, data_file):
         self.data_file = data_file()
         self.data = self.load_data(graph)
         self.stackWidget = stackWidget
@@ -315,7 +317,7 @@ class GraphGenerator(QMainWindow):
         plt.show()
 
 if __name__ == '__main__':
-    graph_generator = GraphGenerator('data.txt')
+    graph_generator = GraphGenerator(stackWidget, 'data.txt')
     graph_generator.plot_graph()
 
 class Speed (QMainWindow):
@@ -538,7 +540,7 @@ def main():
     stackWidget.addWidget (kine_window_m)
     stackWidget.addWidget (kine_window_s)
     stackWidget.addWidget (kine_window_k)
-    stackWidget.addwidget (graph_window)
+    stackWidget.addWidget (graph_window)
 
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
