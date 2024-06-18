@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLineEdit, QVBoxLayout, QWidget, QMessageBox
 import sys
 import math
+import graph 
 import matplotlib.pyplot as plt
 import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
 import ui_newt_acceleration_8, ui_newt_force_9, ui_work_D_10, ui_work_W_12, ui_work_F_11, ui_speed_distance_13, ui_speed_speed_15, ui_speed_time_14
@@ -37,7 +38,7 @@ class MyWindow(QMainWindow):
     def gotoCalc(self):
         self.stackWidget.setCurrentIndex(1)
     def generate_graph (self):
-        self.GraphGenerator()
+        self.stackWidget.setCurrentIndex(19)
 
 class Calc(QMainWindow):
     def __init__(self, stackWidget):
@@ -281,9 +282,10 @@ class Work_F (QMainWindow):
         self.stackWidget.setCurrentIndex (1)
 
 class GraphGenerator(QMainWindow):
-    def __init__(self, data_file):
-        self.data_file = data_file
-        self.data = self.load_data()
+    def __init__(self, stackWidget,data_file):
+        self.data_file = data_file()
+        self.data = self.load_data(graph)
+        self.stackWidget = stackWidget
 
     def load_data(self):
         data = []
@@ -498,6 +500,7 @@ def main():
     stackWidget = QtWidgets.QStackedWidget()  # Centralized QStackedWidget
     main_window = MyWindow(stackWidget)
     calc_window = Calc(stackWidget)
+    graph_window = GraphGenerator(stackWidget)
     quadr_window = Quadratic(stackWidget)
     newt_window = Newton_homepage(stackWidget)
     work_window = Work_homepage(stackWidget)
@@ -535,6 +538,7 @@ def main():
     stackWidget.addWidget (kine_window_m)
     stackWidget.addWidget (kine_window_s)
     stackWidget.addWidget (kine_window_k)
+    stackWidget.addwidget (graph_window)
 
     stackWidget.setCurrentIndex(0)  # Show mainwindow first
     stackWidget.show()  # Show the stackWidget
