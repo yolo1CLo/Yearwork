@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QLin
 import sys
 import os
 import math
-import graph 
+import graph
 import matplotlib.pyplot as plt
 import ui_quad_screen_2, ui_newt_mass_7, ui_work_screen_4, ui_calc_screen_1, ui_kine_screen_6, ui_speed_screen_5, ui_newt_home_3
 import ui_newt_acceleration_8, ui_newt_force_9, ui_work_D_10, ui_work_W_12, ui_work_F_11, ui_speed_distance_13, ui_speed_speed_15, ui_speed_time_14
@@ -26,7 +26,7 @@ from ui_speed_speed_15 import Ui_Form
 from ui_kin_m_16 import Ui_Form
 from ui_kin_s_17 import Ui_Form
 from ui_kin_E_18 import Ui_Form
-import math
+
 
 class MyWindow(QMainWindow):
     def __init__(self, stackWidget):
@@ -285,8 +285,9 @@ class Work_F (QMainWindow):
 
 class GraphGenerator(QMainWindow):
     def __init__(self, stackWidget, data_file):
+        super(GraphGenerator, self).__init__()
         self.data_file = data_file()
-        self.data = self.load_data(graph)
+        self.data = self.load_data()
         self.stackWidget = stackWidget
 
     def load_data(self):
@@ -317,7 +318,7 @@ class GraphGenerator(QMainWindow):
         plt.show()
 
 if __name__ == '__main__':
-    graph_generator = GraphGenerator(stackWidget, 'data.txt')
+    graph_window = GraphGenerator(stackWidget, 'data.txt')
     graph_generator.plot_graph()
 
 class Speed (QMainWindow):
